@@ -2,7 +2,7 @@ const int interval = 20;            // PWM frequency (1000/x)
 unsigned long prevMillis_1 = 0;     // Stores last time cycle was updated
 unsigned long prevMillis_2 = 0;     // Stores last time LED was updated
 int pwmTime = 1;                    // Controls the pulse width duration
-const int cycle = 2;                // How many cycles the pwmTime should remain constant
+const int cycle = 2;                // How many intervals the pwmTime should remain constant
 int onTime;                         // The pulse width
 int offTime;                        // The blank width
 int ledState;;                      // State of the LED
