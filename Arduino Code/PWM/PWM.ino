@@ -4,7 +4,6 @@ unsigned long prevMillis_2 = 0;     // Stores last time LED was updated
 int pwmTime = 1;                    // Controls the pulse width duration
 const int cycle = 2;                // How many intervals the pwmTime should remain constant
 int onTime;                         // The pulse width
-int offTime;                        // The blank width
 int ledState;;                      // State of the LED
 
 void setup() 
@@ -32,22 +31,17 @@ void loop()
     }
 
     onTime = onTime + pwmTime;    // Set pulse width duration
-    offTime = interval - onTime;  // Set blank width duration
   }
 
-  // Turn off the LED
-  if (ledState == HIGH && (curMillis - prevMillis_2 >= onTime))
+  // Toggle the LED
+  if (curMillis - prevMillis_2 >= interval)
   {
     prevMillis_2 = curMillis;
-    ledState = !ledState; 
-    digitalWrite(LED_BUILTIN, ledState);
+    ledState = HIGH; 
   }
-
-  // Turn on the LED
-  if (ledState == LOW && (curMillis - prevMillis_2 >= offTime))
+  if (curMillis - prevMillis_2 >= onTime)
   {
-    prevMillis_2 = curMillis;
-    ledState = !ledState;
-    digitalWrite(LED_BUILTIN, ledState);
+    ledState = LOW; 
   }
+  digitalWrite(LED_BUILTIN, ledState);
 }
